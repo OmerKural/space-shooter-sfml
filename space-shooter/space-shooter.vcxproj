@@ -132,12 +132,16 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Bullet.cpp" />
-    <ClCompile Include="create.cpp" />
+    <ClCompile Include="draw.cpp" />
+    <ClCompile Include="Engine.cpp" />
+    <ClCompile Include="getSprite.cpp" />
+    <ClCompile Include="update.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Player.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Bullet.h" />
+    <ClInclude Include="Engine.h" />
     <ClInclude Include="Player.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

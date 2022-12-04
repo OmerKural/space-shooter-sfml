@@ -8,11 +8,20 @@ using namespace sf;
 class Player
 {
 private:
-	const float radius = 20.f;
 	float speed;
+	Vector2f start_pos;
+	ConvexShape body;
 
 public:
+	Vector2f position;
+
 	Player();
+
+	ConvexShape getSprite();
+	Vector2f getPosition();
+	void setPosition(Vector2f);
+	void shoot();
+	void turnToCursor(Vector2i);
 };
 
 

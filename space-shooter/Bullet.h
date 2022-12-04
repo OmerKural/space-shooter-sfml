@@ -16,8 +16,7 @@ private:
 
 public:
 	Bullet();
-
-	void create(float, float);
+	~Bullet();
 };
 
 
