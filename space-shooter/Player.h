@@ -20,7 +20,7 @@ public:
 	ConvexShape getSprite();
 	Vector2f getPosition();
 	void setPosition(Vector2f new_pos);
-	void shoot(Vector2f dest);
+	void shoot(float rot);
 	void turnToCursor(Vector2i cursor_pos);
 };
 

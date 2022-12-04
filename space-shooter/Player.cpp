@@ -41,11 +41,11 @@ void Player::turnToCursor(Vector2i mouse_pos)
 	const float PI = 3.14159265;
 	float dx = this->getPosition().x - mouse_pos.x;
 	float dy = this->getPosition().y - mouse_pos.y;
-	float rotation = (atan2(dy, dx)) * 180 / PI;
-	this->body.setRotation(rotation + 270.f);
+	float rotation = atan2(dy, dx) * 180 / PI + 270.f;
+	this->body.setRotation(rotation);
 }
 
-void Player::shoot(Vector2f dest)
+void Player::shoot(float rot)
 {
-	Bullet bullet(this->position, dest);
+	Bullet bullet(this->position, rot);
 }

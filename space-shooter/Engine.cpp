@@ -19,27 +19,35 @@ void Engine::run()
 	Player player;
 	vector<Bullet> bullets;
 
+	//Initializing cooldown clock.
+	Clock clock;
+
 	// Main Loop
 	while (window.isOpen())
 	{
 
-		//Update
+		//Controls
 		while (window.pollEvent(event))
 		{
 			if (event.type == Event::Closed ||
 				event.type == Event::KeyPressed && event.key.code == Keyboard::Escape)
 				window.close();
 
-			if (event.type == Event::KeyPressed && event.key.code == Keyboard::Space)
+			if (event.type == Event::KeyPressed && event.key.code == Keyboard::Space && 
+				clock.getElapsedTime() >= Bullet::cooldown)
 			{
-				Bullet x = Bullet(Vector2f(player.getPosition()), Vector2f(Mouse::getPosition()));
+				// Resetting cooldown clock.
+				clock = Clock();
+				Bullet x = Bullet(player.getPosition(), player.getSprite().getRotation());
 				bullets.emplace_back(x);
 			}
 		}
 
+		
+		//Update
 		player.turnToCursor(Mouse::getPosition(window));
 
-		for (Bullet b : bullets)
+		for (auto& b : bullets)
 		{
 			b.update();
 		}
@@ -49,7 +57,7 @@ void Engine::run()
 
 		window.draw(player.getSprite());
 
-		for (Bullet b : bullets)
+		for (auto& b : bullets)
 		{
 			window.draw(b.getSprite());
 		}

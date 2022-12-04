@@ -4,20 +4,15 @@
 #include <iostream>
 using namespace std;
 
-int Bullet::count = 0;
+Time Bullet::cooldown = seconds(1);
 
-Bullet::Bullet(Vector2f pos, Vector2f dest)
+Bullet::Bullet(Vector2f player_pos, float rot)
 {
-	count++; cout << count << endl;
-	speed = 100.f;
-	destination = dest;
+	speed = 15.f;
+	cooldown = seconds(1);
 	body = RectangleShape(dimensions);
-	body.setPosition(pos);
-}
-
-Bullet::~Bullet()
-{
-	
+	body.setPosition(player_pos);
+	rotation = rot - 90.f;
 }
 
 Vector2f Bullet::getPosition()
@@ -37,5 +32,11 @@ RectangleShape Bullet::getSprite()
 
 void Bullet::update()
 {
-	this->body.setPosition(Vector2f(this->getPosition().x + 20, this->getPosition().y + 20));
+	const float PI = 3.14159265;
+	Vector2f pos = Vector2f(
+		this->getPosition().x + cos(rotation * PI / 180) * speed,
+		this->getPosition().y + sin(rotation * PI / 180) * speed
+	);
+	this->body.setPosition(pos);
+
 }

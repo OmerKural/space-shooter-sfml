@@ -10,17 +10,16 @@ class Bullet
 	friend class Player;
 
 private:
-
 	const float WIDTH = 3.f;
 	const float HEIGHT = 5.f;
 	float speed;
+	float rotation;
 	const Vector2f dimensions = Vector2f(WIDTH, HEIGHT);
 
 public:
-	static int count;
-	Bullet(Vector2f, Vector2f);
-	~Bullet();
+	Bullet(Vector2f player_pos, float rot);
 
+	static Time cooldown;
 	Vector2f destination;
 	RectangleShape body;
 
