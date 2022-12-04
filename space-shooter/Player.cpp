@@ -8,7 +8,6 @@ Player::Player()
 {
 	speed = 10.f;
 
-	//start_pos = Engine::middle_of_window;
 	start_pos = Vector2f(Engine::WIDTH/2.f, Engine::HEIGHT / 2.f);
 	position = Vector2f(start_pos.x, start_pos.y);
 
@@ -22,14 +21,19 @@ Player::Player()
 	body.setOutlineColor(Color::White);
 }
 
-Vector2f Player::getPosition()
+ConvexShape Player::getSprite()
 {
-	return position;
+	return this->body;
 }
 
-void Player::setPosition(Vector2f pos)
+Vector2f Player::getPosition()
 {
-	position = pos;
+	return this->body.getPosition();
+}
+
+void Player::setPosition(Vector2f new_pos)
+{
+	this->body.setPosition(new_pos);
 }
 
 void Player::turnToCursor(Vector2i mouse_pos)
@@ -39,4 +43,9 @@ void Player::turnToCursor(Vector2i mouse_pos)
 	float dy = this->getPosition().y - mouse_pos.y;
 	float rotation = (atan2(dy, dx)) * 180 / PI;
 	this->body.setRotation(rotation + 270.f);
+}
+
+void Player::shoot(Vector2f dest)
+{
+	Bullet bullet(this->position, dest);
 }

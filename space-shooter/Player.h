@@ -19,9 +19,9 @@ public:
 
 	ConvexShape getSprite();
 	Vector2f getPosition();
-	void setPosition(Vector2f);
-	void shoot();
-	void turnToCursor(Vector2i);
+	void setPosition(Vector2f new_pos);
+	void shoot(Vector2f dest);
+	void turnToCursor(Vector2i cursor_pos);
 };
 
 
