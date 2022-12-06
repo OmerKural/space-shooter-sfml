@@ -30,7 +30,7 @@ void Engine::run()
 		while (window.pollEvent(event))
 		{
 			if (event.type == Event::Closed ||
-				event.type == Event::KeyPressed && event.key.code == Keyboard::Escape)
+				(event.type == Event::KeyPressed && event.key.code == Keyboard::Escape))
 				window.close();
 
 			if (event.type == Event::KeyPressed && event.key.code == Keyboard::Space && 
@@ -42,25 +42,26 @@ void Engine::run()
 				bullets.emplace_back(x);
 			}
 		}
+		// wasd
+		if (Keyboard::isKeyPressed(Keyboard::W))
+			player.setPosition(Vector2f(player.getPosition().x, player.getPosition().y - Player::speed));
+		if (Keyboard::isKeyPressed(Keyboard::A))
+			player.setPosition(Vector2f(player.getPosition().x - Player::speed, player.getPosition().y));
+		if (Keyboard::isKeyPressed(Keyboard::S))
+			player.setPosition(Vector2f(player.getPosition().x, player.getPosition().y + Player::speed));
+		if (Keyboard::isKeyPressed(Keyboard::D))
+			player.setPosition(Vector2f(player.getPosition().x + Player::speed, player.getPosition().y));
 
-		
+
 		//Update
 		player.turnToCursor(Mouse::getPosition(window));
-
-		for (auto& b : bullets)
-		{
-			b.update();
-		}
+		for (auto& b : bullets) b.update();
 
 		//Draw
 		window.clear();
 
 		window.draw(player.getSprite());
-
-		for (auto& b : bullets)
-		{
-			window.draw(b.getSprite());
-		}
+		for (auto& b : bullets) window.draw(b.getSprite());
 
 		window.display();
 	
