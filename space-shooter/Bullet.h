@@ -11,9 +11,10 @@ class Bullet
 
 private:
 	const float WIDTH = 3.f;
-	const float HEIGHT = 5.f;
+	const float HEIGHT = 3.f;
 	float speed;
 	float rotation;
+	int state;
 	const Vector2f dimensions = Vector2f(WIDTH, HEIGHT);
 
 public:
@@ -25,6 +26,7 @@ public:
 
 	Vector2f getPosition();
 	void setPosition(Vector2f new_pos);
+	void setState(int new_state);
 	void update();
 	RectangleShape getSprite();
 };

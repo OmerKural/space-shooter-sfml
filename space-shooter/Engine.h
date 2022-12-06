@@ -14,14 +14,15 @@ class Engine
 
 private:
 	const unsigned int FPS = 60;
-	static const unsigned int WIDTH = 800;
-	static const unsigned int HEIGHT = 600;
 	const char* TITLE = "Space Shooter";
 
 	Vector2u resolution;
 	Event event;
 
 public:
+	static const unsigned int WIDTH = 800;
+	static const unsigned int HEIGHT = 600;
+
 	RenderWindow window;
 	Engine();
 

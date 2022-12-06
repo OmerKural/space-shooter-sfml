@@ -8,11 +8,11 @@ using namespace sf;
 class Player
 {
 private:
-	float speed;
 	Vector2f start_pos;
 	ConvexShape body;
 
 public:
+	static float speed;
 	Vector2f position;
 
 	Player();
