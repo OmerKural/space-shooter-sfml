@@ -364,5 +364,5 @@ FodyWeavers.xsd
 
 
 # Custom
-.sln
-.vcxproj
+*.sln
+*.vcxproj
