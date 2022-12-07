@@ -131,19 +131,21 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="BigMeteorite.cpp" />
     <ClCompile Include="Bullet.cpp" />
     <ClCompile Include="Engine.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="BigMeteorite.cpp" />
-    <ClCompile Include="SmallMeteorite.cpp" />
+    <ClCompile Include="Meteorite.cpp" />
     <ClCompile Include="Player.cpp" />
+    <ClCompile Include="SmallMeteoriteT.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="BigMeteorite.h" />
     <ClInclude Include="Bullet.h" />
     <ClInclude Include="Engine.h" />
-    <ClInclude Include="BigMeteorite.h" />
-    <ClInclude Include="SmallMeteorite.h" />
+    <ClInclude Include="Meteorite.h" />
     <ClInclude Include="Player.h" />
+    <ClInclude Include="SmallMeteorite.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -72,7 +72,15 @@ void Engine::run()
 					b.setState(1);
 					break;
 				}
-
+			}
+			for (auto& m : small_meteorites)
+			{
+				if (b.getSprite().getGlobalBounds().intersects(m.getSprite().getGlobalBounds()))
+				{
+					m.setState(1);
+					b.setState(1);
+					break;
+				}
 			}
 		}
 		for (auto& m : big_meteorites) m.updateAI();

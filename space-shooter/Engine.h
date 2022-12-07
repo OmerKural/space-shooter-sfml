@@ -26,7 +26,6 @@ public:
 	RenderWindow window;
 	Engine();
 
-	void update();
 	void run();
 };
 
