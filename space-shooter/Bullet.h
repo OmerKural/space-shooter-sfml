@@ -2,6 +2,9 @@
 #ifndef BULLET
 #define BULLET
 
+#include "BigMeteorite.h"
+#include "SmallMeteorite.h"
+
 #include <SFML/Graphics.hpp>
 using namespace sf;
 
@@ -25,10 +28,12 @@ public:
 	RectangleShape body;
 
 	Vector2f getPosition();
+	RectangleShape getSprite();
 	void setPosition(Vector2f new_pos);
 	void setState(int new_state);
-	void update();
-	RectangleShape getSprite();
+
+	void move();
+	void collision(vector<BigMeteorite> &big_meteorite, vector<SmallMeteorite> &small_meteorites);
 };
 
 

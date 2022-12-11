@@ -1,16 +1,17 @@
 #include "Meteorite.h"
 #include "Engine.h"
 
+// statics
 vector<Vector2f> Meteorite::spawns
 {
 	{0, 0},                {Engine::WIDTH / 2, 0},              {Engine::WIDTH, 0},
 	{0, Engine::HEIGHT / 2},                                    {Engine::WIDTH, Engine::HEIGHT / 2},
 	{0, Engine::HEIGHT},   {Engine::WIDTH / 2, Engine::HEIGHT}, {Engine::WIDTH, Engine::HEIGHT}
 };
-
 Vector2f Meteorite::ubounds = Vector2f(float(Engine::WIDTH) + 50.f, float(Engine::HEIGHT) + 50.f);
 float Meteorite::lbounds = -50.f;
 
+// constructors
 Meteorite::Meteorite()
 {
 	speed = 5.f;
@@ -23,31 +24,29 @@ Meteorite::Meteorite()
 	direction = atan2(dy, dx) * 180 / PI;
 }
 
+// getters and setters
 ConvexShape Meteorite::getSprite()
 {
 	return body;
 }
-
 Vector2f Meteorite::getPosition()
 {
 	return body.getPosition();
 }
-
 float Meteorite::getDirection()
 {
 	return direction;
 }
-
 int Meteorite::getState()
 {
 	return state;
 }
-
 void Meteorite::setState(int new_state)
 {
 	state = new_state;
 }
 
+// updaters
 void Meteorite::updateAI()
 {
 	if (state == 0)

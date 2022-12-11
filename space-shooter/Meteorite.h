@@ -10,8 +10,6 @@ using namespace sf;
 
 class Meteorite
 {
-	friend class Bullet;
-
 protected:
 	static vector<Vector2f> spawns;
 	static Vector2f ubounds;
@@ -25,13 +23,11 @@ public:
 	// constructors
 	Meteorite();
 
-	// getters
+	// getters and setters
 	ConvexShape getSprite();
 	Vector2f getPosition();
 	float getDirection();
 	int getState();
-
-	// setters
 	void setState(int new_state);
 
 	// updaters

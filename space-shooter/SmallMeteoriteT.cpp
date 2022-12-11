@@ -1,5 +1,6 @@
 #include "SmallMeteorite.h"
 
+// constructors
 SmallMeteorite::SmallMeteorite(Vector2f spawn_pos, float parent_direction)
 {
 	speed = 5.f;

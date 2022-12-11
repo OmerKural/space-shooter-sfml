@@ -1,5 +1,8 @@
 #include "BigMeteorite.h"
 
+#include <random>
+using namespace std;
+
 BigMeteorite::BigMeteorite(int spawn)
 {
 	state = 0;
@@ -15,7 +18,9 @@ BigMeteorite::BigMeteorite(int spawn)
 	body.setOutlineColor(Color::White);
 	body.setOutlineThickness(1.f);
 
-	std::random_shuffle(spawns.begin(), spawns.end());
+	random_device rd;
+	mt19937 mt(rd());
+	shuffle(spawns.begin(), spawns.end(), mt);
 	body.setPosition(spawns[spawn]);
 
 	int r = std::rand() % 360;
