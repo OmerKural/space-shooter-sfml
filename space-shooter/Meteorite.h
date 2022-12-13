@@ -1,6 +1,4 @@
 #pragma once
-#ifndef METEORITE
-#define METEORITE
 
 #include <vector>
 using namespace std;
@@ -33,8 +31,6 @@ public:
 	// updaters
 	void updateAI();
 };
-
-#endif // !METEORITE
 
 
 

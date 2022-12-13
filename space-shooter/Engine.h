@@ -1,6 +1,4 @@
 #pragma once
-#ifndef ENGINE
-#define ENGINE
 
 #include <SFML/Graphics.hpp>
 #include <SFML/Window.hpp>
@@ -10,8 +8,6 @@ using namespace sf;
 
 class Engine
 {
-	friend class Player;
-
 private:
 	const unsigned int FPS = 60;
 	const char* TITLE = "Space Shooter";
@@ -28,6 +24,3 @@ public:
 
 	void run();
 };
-
-
-#endif // !ENGINE

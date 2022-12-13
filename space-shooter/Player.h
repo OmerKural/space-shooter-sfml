@@ -1,10 +1,9 @@
 #pragma once
-#ifndef PLAYER
-#define PLAYER
 
 #include "BigMeteorite.h"
 #include "SmallMeteorite.h"
 #include "HealthBar.h"
+#include "Coin.h"
 
 #include <vector>
 #include <concepts>
@@ -51,10 +50,8 @@ public:
 	void input();
 	void turnToCursor(Vector2i cursor_pos);
 	void blink();
-	void updateHealth(vector<BigMeteorite>& big_meteorites, vector<HealthBar>& health_bar);
-	void updateHealth(vector<SmallMeteorite>& small_meteorites, vector<HealthBar>& health_bar);
+	void updateHealth(vector<BigMeteorite>& big_meteorites, 
+					  vector<HealthBar>& health_bar);
+	void updateHealth(vector<SmallMeteorite>& small_meteorites, 
+					  vector<HealthBar>& health_bar);
 };
-
-
-
-#endif // !PLAYER

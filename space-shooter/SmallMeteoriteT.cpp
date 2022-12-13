@@ -1,9 +1,7 @@
 #include "SmallMeteorite.h"
 
-// constructors
 SmallMeteorite::SmallMeteorite(Vector2f spawn_pos, float parent_direction)
 {
-	speed = 5.f;
 	state = 0;
 	direction = parent_direction + 45;
 
@@ -20,7 +18,6 @@ SmallMeteorite::SmallMeteorite(Vector2f spawn_pos, float parent_direction)
 
 	body.setPosition(spawn_pos);
 	
-	int r = std::rand() % 360;
+	float r = std::rand() % 360;
 	body.setRotation(r);
-
 }

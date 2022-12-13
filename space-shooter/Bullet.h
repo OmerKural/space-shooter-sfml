@@ -1,9 +1,8 @@
 #pragma once
-#ifndef BULLET
-#define BULLET
 
 #include "BigMeteorite.h"
 #include "SmallMeteorite.h"
+#include "Coin.h"
 
 #include <SFML/Graphics.hpp>
 using namespace sf;
@@ -33,10 +32,7 @@ public:
 	void setState(int new_state);
 
 	void move();
-	void collision(vector<BigMeteorite> &big_meteorite, vector<SmallMeteorite> &small_meteorites);
+	void collision(vector<BigMeteorite>& big_meteorite,
+		vector<SmallMeteorite>& small_meteorites,
+		vector<Coin>& coins, Texture* coin_texture);
 };
-
-
-
-
-#endif // !BULLET

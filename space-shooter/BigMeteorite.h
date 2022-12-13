@@ -1,6 +1,4 @@
 #pragma once
-#ifndef BIG_METEORITE
-#define BIG_METEORITE
 
 #include "Meteorite.h"
 
@@ -9,12 +7,16 @@ using namespace sf;
 
 class BigMeteorite :public Meteorite
 {
+private:
+	float speed;
+
 public:
 	// constructors
 	BigMeteorite(int spawn);
-};
 
-#endif // !BIG_METEORITET
+	// getters and setters
+	float getSpeed();
+};
 
 
 

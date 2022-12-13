@@ -1,5 +1,6 @@
 #include "Meteorite.h"
 #include "Engine.h"
+#include "Coin.h"
 
 // statics
 vector<Vector2f> Meteorite::spawns
@@ -14,11 +15,13 @@ float Meteorite::lbounds = -50.f;
 // constructors
 Meteorite::Meteorite()
 {
+	// this speed initialization is global for Meteorites! may change for different
+	// speeds for small and big meteorites.
 	speed = 5.f;
 	state = 0;
 
 	// Calculate the direction
-	const float PI = 3.14159265;
+	const float PI = float(3.14159265);
 	float dy = Engine::HEIGHT / 2 - body.getPosition().y;
 	float dx = Engine::WIDTH / 2 - body.getPosition().x;
 	direction = atan2(dy, dx) * 180 / PI;
@@ -60,7 +63,8 @@ void Meteorite::updateAI()
 	}
 	else if (state == 1)
 	{
-		body.setFillColor(Color::Black);
+		body.setOutlineColor(Color::Black);
 		body.setPosition(INFINITY, INFINITY);
+		state = -1;
 	}
 }

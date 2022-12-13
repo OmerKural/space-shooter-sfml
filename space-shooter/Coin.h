@@ -1,5 +1,7 @@
 #pragma once
 
+#include "Animation.h"
+
 #include <iostream>
 #include <vector>
 using namespace std;
@@ -7,22 +9,23 @@ using namespace std;
 #include <SFML/Graphics.hpp>
 using namespace sf;
 
-class HealthBar
+class Coin
 {
 private:
-	int state;
-	Vector2f hb_pos;
-	Texture hbt;
-	Sprite hbs;
+	Animation animation;
+	Texture texture;
+	Sprite sprite;
+	Vector2f position;
 
 public:
 	// constructors
-	HealthBar(const char* path_to_file);
+	Coin(Texture* texture, Vector2f position);
+
+	// updaters
+	void updateSprite();
 
 	// getters and setters
 	Sprite getSprite();
-	int getState();
-	void setState(int new_state);
 };
 
 

@@ -43,7 +43,7 @@ void Bullet::move()
 {
 	if (state == 0)
 	{
-		const float PI = 3.14159265;
+		const float PI = float(3.14159265);
 		Vector2f pos = Vector2f(
 			this->getPosition().x + cos(rotation * PI / 180) * speed,
 			this->getPosition().y + sin(rotation * PI / 180) * speed
@@ -54,14 +54,18 @@ void Bullet::move()
 	{
 		body.setFillColor(Color::Black);
 		body.setPosition(INFINITY, INFINITY);
+		state = -1;
 	}
 }
-void Bullet::collision(vector<BigMeteorite> &big_meteorites, vector<SmallMeteorite> &small_meteorites)
+void Bullet::collision(vector<BigMeteorite>& big_meteorites,
+					   vector<SmallMeteorite>& small_meteorites,
+					   vector<Coin>& coins, Texture* coin_texture)
 {
 	for (auto& m : big_meteorites)
 	{
 		if (body.getGlobalBounds().intersects(m.getSprite().getGlobalBounds()))
 		{
+			coins.push_back(Coin(coin_texture, m.getPosition()));
 			small_meteorites.emplace_back(SmallMeteorite(m.getPosition(), m.getDirection()));
 			small_meteorites.emplace_back(SmallMeteorite(m.getPosition(), m.getDirection() + 180.f));
 			m.setState(1);

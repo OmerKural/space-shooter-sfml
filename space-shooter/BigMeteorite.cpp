@@ -5,6 +5,7 @@ using namespace std;
 
 BigMeteorite::BigMeteorite(int spawn)
 {
+	speed = 5.f;
 	state = 0;
 
 	// Draw the shape
