@@ -19,8 +19,12 @@ public:
 	static const unsigned int WIDTH = 800;
 	static const unsigned int HEIGHT = 600;
 
+	Texture coin_texture;
+	Texture health_bar_texture;
 	RenderWindow window;
+
 	Engine();
 
 	void run();
+	void loadTextures();
 };

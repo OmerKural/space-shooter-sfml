@@ -1,26 +1,36 @@
 #include "HealthBar.h"
 
-// constructors
-HealthBar::HealthBar(const char* path_to_file)
-{
-	state = 1;
-	hb_pos = Vector2f(10.f, 10.f);
+int HealthBar::health_bar_count = 4;
 
-	if (!hbt.loadFromFile(path_to_file)) cout << "Couldn't load " << path_to_file << endl;
-	hbs = Sprite(hbt);
-	hbs.setPosition(hb_pos);
+HealthBar::HealthBar(Texture* texture)
+{
+	this->texture = *texture;
+	state_rect.width  = texture->getSize().x;
+	state_rect.height = texture->getSize().y / float(health_bar_count);
+	sprite.setTexture(*texture);
+	sprite.setTextureRect(state_rect);
+	sprite.setPosition(10.f, 10.f);
+	sprite.setScale(1.2f, 1.2f);
 }
 
-// getters and setters
 Sprite HealthBar::getSprite()
 {
-	return hbs;
+	return sprite;
 }
-int HealthBar::getState()
+
+void HealthBar::previous()
 {
-	return state;
+	state_rect.top = std::max(
+		0,
+		state_rect.top - state_rect.height
+	);
+	sprite.setTextureRect(state_rect);
 }
-void HealthBar::setState(int new_state)
+void HealthBar::next()
 {
-	state = new_state;
+	state_rect.top = std::min(
+		int(texture.getSize().y - state_rect.height),
+		state_rect.top + state_rect.height
+	);
+	sprite.setTextureRect(state_rect);
 }

@@ -27,9 +27,9 @@ private:
 	
 	bool is_invincible;
 
-	// private updaters
-	void decreaseHealth(vector<HealthBar>& health_bar);
-	void increaseHealth(vector<HealthBar>& health_bar);
+	// updaters
+	void decreaseHealth(HealthBar& health_bar);
+	void increaseHealth(HealthBar& health_bar);
 
 public:
 	// variables
@@ -50,8 +50,6 @@ public:
 	void input();
 	void turnToCursor(Vector2i cursor_pos);
 	void blink();
-	void updateHealth(vector<BigMeteorite>& big_meteorites, 
-					  vector<HealthBar>& health_bar);
-	void updateHealth(vector<SmallMeteorite>& small_meteorites, 
-					  vector<HealthBar>& health_bar);
+	void updateHealth(vector<BigMeteorite>& big_meteorites, HealthBar& health_bar);
+	void updateHealth(vector<SmallMeteorite>& small_meteorites, HealthBar& health_bar);
 };

@@ -21,7 +21,6 @@ void Animation::update()
 {
 	if (frame_clock.getElapsedTime().asMilliseconds() >= switch_time)
 	{
-		std::cout << current_image.x << std::endl;
 		frame_clock.restart();
 		++current_image.x;
 		if (current_image.x > image_count.x - 1)

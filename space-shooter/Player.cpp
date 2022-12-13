@@ -43,29 +43,13 @@ void Player::setPosition(Vector2f new_pos)
 }
 
 // updaters
-void Player::decreaseHealth(vector<HealthBar>& health_bar)
+void Player::decreaseHealth(HealthBar& health_bar)
 {
-	// get the last element that has a state of 1 and make it 0.
-	for (int i = int(health_bar.size()) - 1; i >= 0; i--)
-	{
-		if (health_bar[i].getState()) 
-		{
-			health_bar[i].setState(0);
-			break;
-		}
-	}
+	health_bar.next();
 }
-void Player::increaseHealth(vector<HealthBar>& health_bar)
+void Player::increaseHealth(HealthBar& health_bar)
 {
-	// get the first element that has a state of 0 and make it 1.
-	for (int i = 0; i < health_bar.size(); i++)
-	{
-		if (!health_bar[i].getState())
-		{
-			health_bar[i].setState(1);
-			break;
-		}
-	}
+	health_bar.previous();
 }
 void Player::blink()
 {
@@ -99,8 +83,7 @@ void Player::turnToCursor(Vector2i mouse_pos)
 	float rotation = atan2(dy, dx) * 180 / PI + 270.f;
 	body.setRotation(rotation);
 }
-void Player::updateHealth(vector<BigMeteorite>& big_meteorites, 
-	                      vector<HealthBar>& health_bar)
+void Player::updateHealth(vector<BigMeteorite>& big_meteorites, HealthBar& health_bar)
 {
 	for (auto& m : big_meteorites)
 	{
@@ -115,12 +98,11 @@ void Player::updateHealth(vector<BigMeteorite>& big_meteorites,
 		}
 	}
 }
-void Player::updateHealth(vector<SmallMeteorite>& small_meteorites, 
-						  vector<HealthBar>& health_bar)
+void Player::updateHealth(vector<SmallMeteorite>& small_meteorites, HealthBar& health_bar)
 {
 	for (auto& m : small_meteorites)
 	{
-		//collision
+		// collision
 		if (invincibility_clock.getElapsedTime() >= invincibility_duration &&
 			m.getSprite().getGlobalBounds().intersects(body.getGlobalBounds()))
 		{

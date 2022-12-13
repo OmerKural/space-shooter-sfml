@@ -6,10 +6,6 @@
 #include "HealthBar.h"
 #include "Coin.h"
 
-#include <vector>
-#include <iostream>
-using namespace std;
-
 Engine::Engine()
 {
 	resolution = Vector2u(WIDTH, HEIGHT);
@@ -20,17 +16,11 @@ Engine::Engine()
 
 void Engine::run()
 {
-	Texture coin_texture;
-	if (!coin_texture.loadFromFile("Assets\\coin_sheet.png"))
-		cout << -1 << endl;
+	loadTextures();
 
 	int meteorite_count = 5;
-	HealthBar hb0 = HealthBar("Assets\\health_bar_0.png");
-	HealthBar hb1 = HealthBar("Assets\\health_bar_1.png");
-	HealthBar hb2 = HealthBar("Assets\\health_bar_2.png");
-	HealthBar hb3 = HealthBar("Assets\\health_bar_3.png");
+	HealthBar health_bar = HealthBar(&health_bar_texture);
 	Player player;
-	vector<HealthBar> health_bar = { hb0, hb1, hb2, hb3 };
 	vector<Coin> coins;
 	vector<Bullet> bullets;
 	vector<BigMeteorite> big_meteorites;
@@ -50,7 +40,7 @@ void Engine::run()
 				window.close();
 
 			if (event.type == Event::KeyPressed && event.key.code == Keyboard::Space && 
-				bullet_cooldown.getElapsedTime() >= Bullet::cooldown)
+				bullet_cooldown.getElapsedTime().asMilliseconds() >= Bullet::cooldown)
 			{
 				// Resetting cooldown clock.
 				bullet_cooldown.restart();
@@ -65,7 +55,7 @@ void Engine::run()
 		for (auto& c : coins) c.updateSprite();
 		player.turnToCursor(Mouse::getPosition(window));
 		player.blink();
-		for (auto& b : bullets) 
+		for (auto& b : bullets)
 		{
 			b.move();
 			b.collision(big_meteorites, small_meteorites, coins, &coin_texture);
@@ -78,14 +68,23 @@ void Engine::run()
 		// Draw
 		window.clear();
 
-		for (auto& c : coins) window.draw(c.getSprite());
 		window.draw(player.getSprite());
+		window.draw(health_bar.getSprite());
+		for (auto& c : coins) window.draw(c.getSprite());
 		for (auto& b : bullets) window.draw(b.getSprite());
 		for (auto& m : big_meteorites) window.draw(m.getSprite());
 		for (auto& m : small_meteorites) window.draw(m.getSprite());
-		for (auto& b : health_bar) if (b.getState()) window.draw(b.getSprite());
 
 		window.display();
 	}
 	// end Main Loop
+}
+
+
+void Engine::loadTextures()
+{
+	if (!coin_texture.loadFromFile("Assets\\coin_sheet.png"))
+		cout << "Couldn't load Assets\\coin_sheet.png" << endl;
+	if (!health_bar_texture.loadFromFile("Assets\\health_bar_sheet.png"))
+		cout << "Couldn't load Assets\\health_bar_sheet.png" << endl;
 }

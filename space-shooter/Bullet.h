@@ -22,7 +22,7 @@ private:
 public:
 	Bullet(Vector2f player_pos, float rot);
 
-	static Time cooldown;
+	static float cooldown;
 	Vector2f destination;
 	RectangleShape body;
 

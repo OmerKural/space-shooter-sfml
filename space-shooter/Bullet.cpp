@@ -9,13 +9,12 @@
 #include <vector>
 using namespace std;
 
-Time Bullet::cooldown = seconds(1);
+float Bullet::cooldown = 500.f;
 
 Bullet::Bullet(Vector2f player_pos, float rot)
 {
 	speed = 15.f;
 	state = 0;
-	cooldown = seconds(1);
 	body = RectangleShape(dimensions);
 	body.setFillColor(Color::White);
 	body.setPosition(player_pos);
