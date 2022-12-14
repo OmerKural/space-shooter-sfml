@@ -11,6 +11,9 @@ private:
 	float speed;
 
 public:
+	// statics
+	static const int points = 50;
+
 	// constructors
 	SmallMeteorite(Vector2f spawn_pos, float parent_direction);
 

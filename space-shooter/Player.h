@@ -20,11 +20,12 @@ private:
 	ConvexShape body;
 	
 	static int health;
-	static Clock blink_clock;
+	static Clock isInvincible_clock;
 	static Clock invincibility_clock;
-	static Time blink_interval;
+	static Time isInvincible_interval;
 	static Time invincibility_duration;
 	
+	int points;
 	bool is_invincible;
 
 	// updaters
@@ -44,12 +45,14 @@ public:
 	// getters and setters
 	ConvexShape getSprite();
 	Vector2f getPosition();
+	int getPoints();
 	void setPosition(Vector2f new_pos);
+	void setPoints(int new_points);
 
 	// updaters
 	void input();
 	void turnToCursor(Vector2i cursor_pos);
-	void blink();
+	void isInvincible();
 	void updateHealth(vector<BigMeteorite>& big_meteorites, HealthBar& health_bar);
 	void updateHealth(vector<SmallMeteorite>& small_meteorites, HealthBar& health_bar);
 };

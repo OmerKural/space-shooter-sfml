@@ -26,8 +26,8 @@ public:
 	Sprite getSprite();
 
 	// updaters
-	void previous();
-	void next();
+	void increase();
+	void decrease();
 };
 
 

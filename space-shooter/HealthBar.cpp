@@ -18,7 +18,7 @@ Sprite HealthBar::getSprite()
 	return sprite;
 }
 
-void HealthBar::previous()
+void HealthBar::increase()
 {
 	state_rect.top = std::max(
 		0,
@@ -26,7 +26,7 @@ void HealthBar::previous()
 	);
 	sprite.setTextureRect(state_rect);
 }
-void HealthBar::next()
+void HealthBar::decrease()
 {
 	state_rect.top = std::min(
 		int(texture.getSize().y - state_rect.height),

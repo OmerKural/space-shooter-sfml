@@ -4,15 +4,14 @@
 #include "Meteorite.h"
 #include "Coin.h"
 
-// static variable initialisations
 int Player::health = 3;
 float Player::speed = 5.f;
 Clock Player::invincibility_clock = Clock();
 Time Player::invincibility_duration = seconds(3);
 
-// constructors
 Player::Player()
 {
+	points = 0;
 	is_invincible = true;
 
 	start_pos = Vector2f(Engine::WIDTH/2.f, Engine::HEIGHT / 2.f);
@@ -28,7 +27,6 @@ Player::Player()
 	body.setOutlineColor(Color::White);
 }
 
-// getters and setters
 ConvexShape Player::getSprite()
 {
 	return body;
@@ -37,21 +35,20 @@ Vector2f Player::getPosition()
 {
 	return body.getPosition();
 }
+int Player::getPoints()
+{
+	return points;
+}
 void Player::setPosition(Vector2f new_pos)
 {
 	body.setPosition(new_pos);
 }
+void Player::setPoints(int new_points)
+{
+	points = new_points;
+}
 
-// updaters
-void Player::decreaseHealth(HealthBar& health_bar)
-{
-	health_bar.next();
-}
-void Player::increaseHealth(HealthBar& health_bar)
-{
-	health_bar.previous();
-}
-void Player::blink()
+void Player::isInvincible()
 {
 	if (is_invincible && invincibility_clock.getElapsedTime() <= invincibility_duration)
 	{
@@ -91,7 +88,7 @@ void Player::updateHealth(vector<BigMeteorite>& big_meteorites, HealthBar& healt
 		if (invincibility_clock.getElapsedTime() >= invincibility_duration &&
 			m.getSprite().getGlobalBounds().intersects(body.getGlobalBounds()))
 		{
-			decreaseHealth(health_bar);
+			health_bar.decrease();
 			--health;
 			is_invincible = true;
 			invincibility_clock = Clock();
@@ -106,7 +103,7 @@ void Player::updateHealth(vector<SmallMeteorite>& small_meteorites, HealthBar& h
 		if (invincibility_clock.getElapsedTime() >= invincibility_duration &&
 			m.getSprite().getGlobalBounds().intersects(body.getGlobalBounds()))
 		{
-			decreaseHealth(health_bar);
+			health_bar.decrease();
 			--health;
 			is_invincible = true;
 			invincibility_clock.restart();

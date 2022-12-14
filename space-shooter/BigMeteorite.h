@@ -11,6 +11,9 @@ private:
 	float speed;
 
 public:
+	// statics
+	static const int points = 100;
+
 	// constructors
 	BigMeteorite(int spawn);
 

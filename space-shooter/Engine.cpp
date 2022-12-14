@@ -6,6 +6,8 @@
 #include "HealthBar.h"
 #include "Coin.h"
 
+#include <string>
+
 Engine::Engine()
 {
 	resolution = Vector2u(WIDTH, HEIGHT);
@@ -29,6 +31,19 @@ void Engine::run()
 
 	for (int i = 0; i < meteorite_count; i++) big_meteorites.emplace_back(BigMeteorite(i%9));
 
+	sf::Font font;
+	if (!font.loadFromFile("Fonts\\ARCADECLASSIC.ttf"))
+	{
+		cout << "Couldn't load font" << endl;
+	}
+
+	sf::Text point_text;
+	point_text.setFont(font);
+	point_text.setString("0 Points");
+	point_text.setCharacterSize(20);
+	point_text.setFillColor(sf::Color::White);
+	point_text.setPosition(10, 30);
+
 	// Main Loop
 	while (window.isOpen())
 	{
@@ -39,7 +54,7 @@ void Engine::run()
 				(event.type == Event::KeyPressed && event.key.code == Keyboard::Escape))
 				window.close();
 
-			if (event.type == Event::KeyPressed && event.key.code == Keyboard::Space && 
+			if (event.type == Event::KeyPressed && event.key.code == Keyboard::Space &&
 				bullet_cooldown.getElapsedTime().asMilliseconds() >= Bullet::cooldown)
 			{
 				// Resetting cooldown clock.
@@ -51,23 +66,25 @@ void Engine::run()
 		// WASD
 		player.input();
 
-		// Update
-		for (auto& c : coins) c.updateSprite();
+		// Update ------------------------------------
+		point_text.setString(to_string(player.getPoints()) + " Points");
 		player.turnToCursor(Mouse::getPosition(window));
-		player.blink();
+		player.isInvincible();
+		for (auto& c : coins) c.updateSprite();
 		for (auto& b : bullets)
 		{
 			b.move();
-			b.collision(big_meteorites, small_meteorites, coins, &coin_texture);
+			b.collision(player, big_meteorites, small_meteorites, coins, &coin_texture);
 		}
 		for (auto& m : big_meteorites) m.updateAI();
 		for (auto& m : small_meteorites) m.updateAI();
 		player.updateHealth(big_meteorites, health_bar);
 		player.updateHealth(small_meteorites, health_bar);
 
-		// Draw
+		// Draw ---------------------------------------
 		window.clear();
 
+		window.draw(point_text);
 		window.draw(player.getSprite());
 		window.draw(health_bar.getSprite());
 		for (auto& c : coins) window.draw(c.getSprite());
@@ -79,7 +96,6 @@ void Engine::run()
 	}
 	// end Main Loop
 }
-
 
 void Engine::loadTextures()
 {

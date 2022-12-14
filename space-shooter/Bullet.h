@@ -3,14 +3,13 @@
 #include "BigMeteorite.h"
 #include "SmallMeteorite.h"
 #include "Coin.h"
+#include "Player.h"
 
 #include <SFML/Graphics.hpp>
 using namespace sf;
 
 class Bullet
 {
-	friend class Player;
-
 private:
 	const float WIDTH = 3.f;
 	const float HEIGHT = 3.f;
@@ -32,7 +31,8 @@ public:
 	void setState(int new_state);
 
 	void move();
-	void collision(vector<BigMeteorite>& big_meteorite,
+	void collision(Player& player,
+		vector<BigMeteorite>& big_meteorite,
 		vector<SmallMeteorite>& small_meteorites,
 		vector<Coin>& coins, Texture* coin_texture);
 };

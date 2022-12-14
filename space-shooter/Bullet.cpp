@@ -56,7 +56,8 @@ void Bullet::move()
 		state = -1;
 	}
 }
-void Bullet::collision(vector<BigMeteorite>& big_meteorites,
+void Bullet::collision(Player& player,
+					   vector<BigMeteorite>& big_meteorites,
 					   vector<SmallMeteorite>& small_meteorites,
 					   vector<Coin>& coins, Texture* coin_texture)
 {
@@ -64,6 +65,7 @@ void Bullet::collision(vector<BigMeteorite>& big_meteorites,
 	{
 		if (body.getGlobalBounds().intersects(m.getSprite().getGlobalBounds()))
 		{
+			player.setPoints(player.getPoints() + BigMeteorite::points);
 			coins.push_back(Coin(coin_texture, m.getPosition()));
 			small_meteorites.emplace_back(SmallMeteorite(m.getPosition(), m.getDirection()));
 			small_meteorites.emplace_back(SmallMeteorite(m.getPosition(), m.getDirection() + 180.f));
@@ -76,6 +78,7 @@ void Bullet::collision(vector<BigMeteorite>& big_meteorites,
 	{
 		if (body.getGlobalBounds().intersects(m.getSprite().getGlobalBounds()))
 		{
+			player.setPoints(player.getPoints() + SmallMeteorite::points);
 			m.setState(1);
 			this->setState(1);
 			break;
